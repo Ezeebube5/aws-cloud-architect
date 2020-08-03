@@ -1,0 +1,17 @@
+1. Minimum RTO for a single AZ outage
+The RTO in such case would be the time required to switch to a different AZ. (Approximately 60-120 seconds).
+
+Caveat: Large transactions or long recovery processes can increase failover time and it may also take more time for the RDS console to reflect the new AZ.
+	
+2. Minimum RTO for a single region outage
+In this scenario, RTO involves spinning up another RDS instance and applying all changes since last backup. 15-30 mins. 
+	
+3. Minimum RPO for a single AZ outage
+A single AZ outage might incur subsecond data loss since the latency between AZs is about a few milliseconds, so a minimum RPO for a single AZ outage is 1 second.
+	
+4. Minimum RPO for a single region outage
+Restoring from backup takes some time (i.e spinning up a new instance and applying all changes since last backup). This takes at least 10 minutes depending on the number of logs that need to be applied. Also, the time to configure the application is also considered which is at least 1 config change. (approximately 10 minutes). 
+
+Data loss is based on the frequency of data replication from master to replica across regions. Transaction log backups are taken every 5 minutes. 
+
+Total time: at least 40 minutes (10 minutes reconfiguration time + 10-30 minutes restoration time)

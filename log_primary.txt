@@ -1,0 +1,50 @@
+[ec2-user@ip-10-1-10-73 ~]$ mysql -h mysql-primary-1.cwygjz2jxtln.us-west-2.rds.amazonaws.com -u admin -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 8.0.17 Source distribution
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use udacity
+Database changed
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| udacity            |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> CREATE TABLE `EMPLOYEE` (
+    ->`ID` bigint(20) NOT NULL AUTO_INCREMENT,
+    ->`NAME` varchar(100) NOT NULL,
+    ->PRIMARY KEY (`ID`)
+    ->) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+    ->   `NAME` varchar(100) NOT N' at line 2
+mysql> CREATE TABLE `USER` (`ID` bigint(20) NOT NULL AUTO_INCREMENT, `USERNAME` varchar(100) NOT NULL, PRIMARY KEY (`ID`) ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+Query OK, 0 rows affected, 1 warning (0.07 sec)
+
+mysql> INSERT into USER (USERNAME) values ('donald jerry');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM USER e;
++----+--------------+
+| ID | USERNAME     |
++----+--------------+
+|  2 | donald jerry |
++----+--------------+
+1 row in set (0.00 sec)
+
+
